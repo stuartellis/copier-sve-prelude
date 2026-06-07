@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.4.0 (2026-06-07)
+
+### Features
+
+- **tooling**: Template is now self-managed
+  ([`a29a939`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/a29a939ba83f25677b36c956b5c4b3d099b369fd))
+
+
 ## v0.3.1 (2026-06-07)
 
 ### Bug Fixes
