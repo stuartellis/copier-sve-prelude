@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.5.0 (2026-06-07)
+
+### Features
+
+- **template**: Optional vcs hooks tasks
+  ([`32ec8f9`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/32ec8f993090aef3b7fb7689c72cadced65b5f5f))
+
+
 ## v0.4.0 (2026-06-07)
 
 ### Features
