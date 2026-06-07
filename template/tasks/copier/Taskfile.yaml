@@ -67,4 +67,4 @@ tasks:
       This enables you to see the command that Task generates and the version of Copier.
     silent: false
     cmds:
-      - "{{.CURRENT_COPIER_CMD}} {{.CLI_ARGS}}"
+      - "{{.CURRENT_COPIER_CMD}} --version"
