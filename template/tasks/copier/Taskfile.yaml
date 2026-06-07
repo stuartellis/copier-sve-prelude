@@ -1,3 +1,4 @@
+---
 # Tasks for the Copier tool
 #
 # - https://taskfile.dev/
@@ -120,7 +121,7 @@ tasks:
       - "{{.CURRENT_COPIER_CMD}} update -A -a {{.COPIER_ANSWERS_FILE}}"
 
   version:
-    desc: "Get the current tool version"
+    desc: "Get the current version of Copier"
     summary: |
       Run the Copier tool with --version
 
