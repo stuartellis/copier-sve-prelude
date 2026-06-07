@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.3.1 (2026-06-07)
+
+### Bug Fixes
+
+- **template**: Fix markers for Markdown files
+  ([`b9ff29a`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/b9ff29a7361a45783659622dc9747c05e93b8dff))
+
+
 ## v0.3.0 (2026-06-07)
 
 ### Bug Fixes
