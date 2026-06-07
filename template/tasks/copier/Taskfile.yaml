@@ -1,8 +1,9 @@
-# Tasks for the Task runner:
+# Tasks for the Copier tool
 #
-# https://taskfile.dev/
+# - https://taskfile.dev/
+# - https://copier.readthedocs.io/en/stable/
 #
-# Set this variable to override the default:
+# Set these variables to override the defaults:
 #   - COPIER_CMD
 #   - COPIER_VERSION_ID
 
