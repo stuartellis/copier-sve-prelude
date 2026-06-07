@@ -1,0 +1,69 @@
+# Tasks for the Task runner:
+#
+# https://taskfile.dev/
+#
+# Set this variable to override the default:
+#   - COPIER_CMD
+#   - COPIER_VERSION_ID
+
+version: "3.45"
+
+set: [pipefail]
+
+vars:
+  COPIER_VERSION_ID: "9.15.1"
+  # TODO: Use a container image for Copier
+  DEFAULT_COPIER_CMD: "pipx run copier=={{.COPIER_VERSION_ID}}"
+  CURRENT_COPIER_CMD:
+    ref: "default .DEFAULT_COPIER_CMD .COPIER_CMD"
+
+tasks:
+  default:
+    cmds:
+      - task: "version"
+
+  add:
+    desc: "Add the specified Copier template to the project"
+    aliases:
+      - copy
+    summary: |
+      Add the Copier template specified by the URL to the current project.
+
+      This uses Task argument forwarding, so that you can set Copier arguments as needed.
+
+      To avoid issues, use the Git SSH URL:
+      For example:
+        task copier:add -- git@gitlab.com:group/my-copier-template.git
+    cmds:
+      - "{{.CURRENT_COPIER_CMD}} copy {{.CLI_ARGS}}"
+
+  run:
+    desc: "Run Copier with the specified arguments"
+    summary: |
+      Run the Copier tool with the specified arguments
+
+      This uses Task argument forwarding.
+    cmds:
+      - "{{.CURRENT_COPIER_CMD}} {{.CLI_ARGS}}"
+
+  update:
+    desc: "Update the project with a Copier template"
+    summary: |
+      Update the current project with a Copier template.
+
+      To specify the Copier template, set the variable COPIER_ANSWERS_FILE.
+      The URL of each template is stored by the relevant answers file in the current project.
+      For example:
+        COPIER_ANSWERS_FILE=copier-answers-my-template.yaml task copier:update
+    cmds:
+      - "{{.CURRENT_COPIER_CMD}} update -a {{.COPIER_ANSWERS_FILE}} ."
+
+  version:
+    desc: "Run Copier to get the current tool and version"
+    summary: |
+      Run the Copier tool with --version
+
+      This enables you to see the command that Task generates and the version of Copier.
+    silent: false
+    cmds:
+      - "{{.CURRENT_COPIER_CMD}} {{.CLI_ARGS}}"

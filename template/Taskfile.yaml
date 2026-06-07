@@ -1,0 +1,20 @@
+# Tasks for the Task runner:
+#
+# https://taskfile.dev/
+
+version: "3.45"
+
+set: [pipefail]
+
+includes:
+  copier: tasks/copier
+
+tasks:
+  default:
+    cmds:
+      - task: list
+
+  list:
+    desc: List available tasks
+    cmds:
+      - "{{.TASK_EXE}} --list"
