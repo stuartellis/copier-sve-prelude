@@ -5,7 +5,7 @@
 #
 # https://copier.readthedocs.io/en/stable/updating/#never-change-the-answers-file-manually
 
-_commit: v0.3.1
+_commit: v0.5.0
 _src_path: git@gitlab.com:stuartellis-org/templates/copier-sve-prelude.git
 copyright_date: '2026'
 copyright_holder: Stuart Ellis
