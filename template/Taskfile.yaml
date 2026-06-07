@@ -2,7 +2,7 @@
 #
 # https://taskfile.dev/
 
-version: "3.45"
+version: "3.50"
 
 set: [pipefail]
 
@@ -12,7 +12,7 @@ includes:
 tasks:
   default:
     cmds:
-      - task: list
+      - task: "list"
 
   list:
     desc: List available tasks

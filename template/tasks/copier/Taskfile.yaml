@@ -7,16 +7,18 @@
 #   - COPIER_CMD
 #   - COPIER_VERSION_ID
 
-version: "3.45"
+version: "3.50"
 
 set: [pipefail]
 
 vars:
   COPIER_VERSION_ID: "9.15.1"
-  # TODO: Use a container image for Copier
   DEFAULT_COPIER_CMD: "pipx run copier=={{.COPIER_VERSION_ID}}"
   CURRENT_COPIER_CMD:
     ref: "default .DEFAULT_COPIER_CMD .COPIER_CMD"
+  COPIER_PRELUDE_ANSWERS_FILE: ".copier-answers-sve-prelude.yaml"
+  COPIER_PROJECT_ANSWER_FILES:
+    sh: "ls .copier-answers-*.*"
 
 tasks:
   default:
@@ -38,6 +40,27 @@ tasks:
     cmds:
       - "{{.CURRENT_COPIER_CMD}} copy {{.CLI_ARGS}}"
 
+  list:
+    desc: "Lists the Copier answers files in the current project"
+    summary: |
+      Lists the Copier answers files in the current project
+    silent: true
+    cmds:
+      - for: { var: COPIER_PROJECT_ANSWER_FILES }
+        cmd: "echo {{.ITEM}}"
+
+  list:children:
+    desc: "Lists only the child Copier answers files in the current project"
+    summary: |
+      Lists the child Copier answers files in the current project
+
+      This excludes the prelude Copier template
+    silent: true
+    cmds:
+      - for: { var: COPIER_PROJECT_ANSWER_FILES }
+        cmd: "echo {{.ITEM}}"
+        if: '[ "{{.ITEM}}" != {{.COPIER_PRELUDE_ANSWERS_FILE}} ]'
+
   run:
     desc: "Run Copier with the specified arguments"
     summary: |
@@ -48,23 +71,60 @@ tasks:
       - "{{.CURRENT_COPIER_CMD}} {{.CLI_ARGS}}"
 
   update:
-    desc: "Update the project with a Copier template"
+    desc: "Updates all of the Copier templates"
     summary: |
-      Update the current project with a Copier template.
+      Update all of the Copier templates that are used by the current project.
+
+      Uses the answers file for the templates, rather than prompting the user.
+    cmds:
+      - task: "update:prelude"
+      - task: "update:children"
+
+  update:children:
+    desc: "Updates the Copier templates, except prelude"
+    summary: |
+      Update the Copier templates that are used by the current project.
+
+      Use the answers file for each template, rather than prompt the user.
+
+      This excludes the prelude Copier template.
+    cmds:
+      - for: { var: COPIER_PROJECT_ANSWER_FILES }
+        cmd: "{{.CURRENT_COPIER_CMD}} update -A -a {{.ITEM}}"
+        if: '[ "{{.ITEM}}" != {{.COPIER_PRELUDE_ANSWERS_FILE}} ]'
+
+  update:prelude:
+    desc: "Update the prelude Copier template"
+    summary: |
+      Update the current project with the prelude Copier template.
+
+      Use the answers file for the template, rather than prompt the user.
+    cmds:
+      - "{{.CURRENT_COPIER_CMD}} update -A -a {{.COPIER_PRELUDE_ANSWERS_FILE}}"
+
+  update:single:
+    desc: "Update a specific Copier template from an answers file"
+    summary: |
+      Update the current project with one of the Copier templates.
 
       To specify the Copier template, set the variable COPIER_ANSWERS_FILE.
       The URL of each template is stored by the relevant answers file in the current project.
       For example:
         COPIER_ANSWERS_FILE=copier-answers-my-template.yaml task copier:update
+    requires:
+      vars:
+        - name: COPIER_ANSWERS_FILE
+          enum:
+            ref: .COPIER_PROJECT_ANSWER_FILES
     cmds:
-      - "{{.CURRENT_COPIER_CMD}} update -a {{.COPIER_ANSWERS_FILE}} ."
+      - "{{.CURRENT_COPIER_CMD}} update -A -a {{.COPIER_ANSWERS_FILE}}"
 
   version:
-    desc: "Run Copier to get the current tool and version"
+    desc: "Get the current tool version"
     summary: |
       Run the Copier tool with --version
 
       This enables you to see the command that Task generates and the version of Copier.
     silent: false
     cmds:
-      - "{{.CURRENT_COPIER_CMD}} --version"
+      - "{{.CURRENT_COPIER_CMD}} --version {{.CLI_ARGS}}"
