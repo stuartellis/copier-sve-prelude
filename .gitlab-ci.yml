@@ -1,0 +1,36 @@
+---
+stages:
+  - release
+
+variables:
+  PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
+  PIP_ROOT_USER_ACTION: ignore
+
+semantic-release:
+  stage: release
+  image: python:3.14-slim-trixie
+  variables:
+    # Git must create a full clone
+    GIT_STRATEGY: clone
+    GIT_DEPTH: 0
+    # Set variable for python-semantic-release to use
+    GIT_COMMIT_AUTHOR: "$GITLAB_USER_NAME <$GITLAB_USER_EMAIL>"
+  before_script:
+    - apt-get -qy update
+    - apt-get install -qy git
+    - pip install python-semantic-release==10.5.3
+    - git checkout -B "$CI_COMMIT_REF_NAME"
+
+  script:
+    - semantic-release -c releaserc.toml version --print
+    - semantic-release -c releaserc.toml version
+    - semantic-release -c releaserc.toml changelog
+    - semantic-release -c releaserc.toml publish
+
+  cache:
+    paths:
+      - ${PIP_CACHE_DIR}
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
+      when: on_success

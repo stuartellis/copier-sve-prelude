@@ -1,0 +1,19 @@
+[semantic_release]
+# Allow 0.x.x versions
+allow_zero_version = true
+major_on_zero = false
+# Do not trigger Git hooks
+no_git_verify = true
+
+[semantic_release.commit_author]
+env = "GIT_COMMIT_AUTHOR"
+default = "semantic-release <semantic-release>"
+
+[semantic_release.publish]
+# Use an empty list to avoid errors with GitLab
+dist_glob_patterns = []
+
+[semantic_release.remote]
+type = "gitlab"
+# Must be set as false for releases to be published to GitLab Releases
+upload_to_vcs_release = false
