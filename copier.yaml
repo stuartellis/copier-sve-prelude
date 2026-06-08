@@ -28,6 +28,7 @@ _envops:
 # Create these files if they do not exist
 _skip_if_exists:
   - .gitignore
+  - .gitlab-ci.yml
   - LICENSE.md
   - Taskfile.yaml
   - README.md
