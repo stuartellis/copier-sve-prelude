@@ -1,0 +1,40 @@
+---
+# Tasks for managing Task configurations
+#
+# - https://taskfile.dev/
+
+version: "3.50"
+
+set: [pipefail]
+
+tasks:
+  default:
+    cmds:
+      - task: "register:includes"
+
+  register:includes:
+    desc: "Register tasks"
+    summary: |
+      Generates the Taskfile TASK_INCLUSIONS_INDEX_FILE.
+
+      This Taskfile includes the subdirectories in TASK_INCLUSIONS_ROOT_DIR.
+    aliases:
+      - register
+    silent: true
+    cmds:
+      - "mkdir -p {{.TASK_INCLUSIONS_INDEX_DIR}}"
+      - "rm -f {{.TASK_INCLUSIONS_INDEX_FILE}}"
+      - for: ["---", 'version: "3.50"', "", "includes:"]
+        cmd: "echo '{{.ITEM}}' >> {{.TASK_INCLUSIONS_INDEX_FILE}}"
+      - for: { var: TASK_INCLUSIONS_DIRS }
+        cmd: |
+          echo '  {{.ITEM}}:' >> {{.TASK_INCLUSIONS_INDEX_FILE}} &&
+          echo '    taskfile: ../../{{.TASK_INCLUSIONS_BASE_DIR}}/{{.ITEM}}' >> {{.TASK_INCLUSIONS_INDEX_FILE}}
+          echo '    optional: true' >> {{.TASK_INCLUSIONS_INDEX_FILE}}
+          echo '' >> {{.TASK_INCLUSIONS_INDEX_FILE}
+    vars:
+      TASK_INCLUSIONS_BASE_DIR:
+        ref: "base .TASK_INCLUSIONS_ROOT_DIR"
+      TASK_INCLUSIONS_DIRS:
+        sh: "ls {{.TASK_INCLUSIONS_ROOT_DIR}}"
+      TASK_INCLUSIONS_INDEX_FILE: "{{.TASK_INCLUSIONS_INDEX_DIR}}/Taskfile.yaml"
