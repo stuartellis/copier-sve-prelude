@@ -9,9 +9,16 @@ set: [pipefail]
 
 includes:
   copier:
-    taskfile: tasks/copier
-  hooks:
-    taskfile: tasks/vcs-hooks
+    taskfile: tasks/prelude/copier
+  plumbing:
+    taskfile: tasks/prelude/plumbing
+    flatten: true
+    vars:
+      TASK_INCLUSIONS_INDEX_DIR: "./tasks/.plumbing/managed"
+      TASK_INCLUSIONS_ROOT_DIR: "./tasks/managed"
+  managed:
+    taskfile: tasks/.plumbing/managed
+    flatten: true
     optional: true
 
 tasks:
