@@ -2,6 +2,28 @@
 
 <!-- version list -->
 
+## v0.6.0 (2026-06-08)
+
+### Chores
+
+- **tooling**: Update Taskfile
+  ([`934e67f`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/934e67f17e0cb31e7bf02c218efa1dfcfeb37d3a))
+
+- **tooling**: Use copier-sve-prelude 0.5.0
+  ([`e7b11a9`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/e7b11a9a574b691db7e8ad3aad72e7e9d8d87e70))
+
+### Features
+
+- **template**: Add support for GitLab Pipelines
+  ([`610326f`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/610326f9bf1bdad03def72fe24a264f23bbdb2cd))
+
+- **template**: Populate .gitignore file
+  ([`6ff0c47`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/6ff0c4735780da518b94beb5b6c901de0c2b8324))
+
+- **template**: Task to register tasks from child templates
+  ([`48f1034`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/48f1034fafa10adbcc8f433432e1b11af2b8aed0))
+
+
 ## v0.5.0 (2026-06-07)
 
 ### Features
