@@ -8,12 +8,9 @@ version: "3.50"
 set: [pipefail]
 
 tasks:
-  default:
-    cmds:
-      - task: "register:includes"
 
   register:includes:
-    desc: "Register tasks"
+    desc: "Register managed tasks"
     summary: |
       Generates the Taskfile TASK_INCLUSIONS_INDEX_FILE.
 
