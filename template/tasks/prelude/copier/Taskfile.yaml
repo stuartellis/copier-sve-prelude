@@ -13,7 +13,7 @@ version: "3.50"
 set: [pipefail]
 
 vars:
-  COPIER_VERSION_ID: "9.15.1"
+  COPIER_VERSION_ID: "9.17.0"
   DEFAULT_COPIER_CMD: "pipx run copier=={{.COPIER_VERSION_ID}}"
   CURRENT_COPIER_CMD:
     ref: "default .DEFAULT_COPIER_CMD .COPIER_CMD"
