@@ -2,6 +2,48 @@
 
 <!-- version list -->
 
+## v0.7.0 (2026-07-26)
+
+### Bug Fixes
+
+- **template**: Remove default from plumbing to avoid conflicting default tasks
+  ([`b32be33`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/b32be3393f247bd51f9c4a5b7c6d58c3434d12be))
+
+### Chores
+
+- **template**: Improve task summary
+  ([`fff4e13`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/fff4e135989d567b8b041eae65db615fd9f92249))
+
+### Features
+
+- **template**: Add README for Prelude
+  ([`780fafd`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/780fafda0cd1e9a3ae11c4e00510f9bc122509ad))
+
+- **template**: Exclude IDEs from source control
+  ([`b1c37c2`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/b1c37c23045715dab660388c79beac19882b7f67))
+
+- **template**: Exclude rumdl cache from version control
+  ([`7fb7409`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/7fb74099e35922e3d26b50c42b91c9ea78202f0e))
+
+- **template**: Git commit on update
+  ([`d58b57c`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/d58b57c1036dc30314183ba5659ff626fc2451c0))
+
+- **template**: Move vars into plumbig task
+  ([`b5c598c`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/b5c598ca3c0f93e375acb5990b10adb767a068ba))
+
+- **template**: Raise Copier version to 9.17.0
+  ([`5d1dd1d`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/5d1dd1da4bd412d5d077c3fde1f4fbcc61628168))
+
+- **template**: Remove MIT license
+  ([`78da958`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/78da95889de7177a9374ed9e734dc0b8bf528bb6))
+
+- **template**: Rename tasks directory to .tasks
+  ([`43ef542`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/43ef542c96e6051c7f4607f0f2655cca732012f1))
+
+- **tooling**: Add prek
+  ([`d2d3f9b`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/d2d3f9b6c60bca5fc090c0f947800c6b812cc127))
+
+
 ## v0.6.0 (2026-06-08)
 
 ### Chores
