@@ -35,7 +35,7 @@ tasks:
 
       This uses Task argument forwarding, so that you can set Copier arguments as needed.
 
-      To avoid issues, use the Git SSH URL:
+      To avoid issues, use the Git SSH URL, rather than the HTTPS address.
       For example:
         task copier:add -- git@gitlab.com:group/my-copier-template.git
     cmds:
