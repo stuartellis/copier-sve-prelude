@@ -7,8 +7,11 @@ version: "3.50"
 
 set: [pipefail]
 
-tasks:
+vars:
+  TASK_INCLUSIONS_INDEX_DIR: "./tasks/.plumbing/managed"
+  TASK_INCLUSIONS_ROOT_DIR: "./tasks/managed"
 
+tasks:
   register:includes:
     desc: "Register managed tasks"
     summary: |
