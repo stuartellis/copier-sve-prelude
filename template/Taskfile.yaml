@@ -13,9 +13,6 @@ includes:
   plumbing:
     taskfile: tasks/prelude/plumbing
     flatten: true
-    vars:
-      TASK_INCLUSIONS_INDEX_DIR: "./tasks/.plumbing/managed"
-      TASK_INCLUSIONS_ROOT_DIR: "./tasks/managed"
   managed:
     taskfile: tasks/.plumbing/managed
     flatten: true

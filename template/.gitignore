@@ -1,11 +1,20 @@
 # Copier
 .rej
 
+# fnox
+fnox.local.toml
+
+# JetBrains IDEs
+.idea
+
 # Task
 .task
 
-# fnox
-fnox.local.toml
+# rumdl
+.rumdl_cache
+
+# Visual Studio Code
+.vscode
 
 ## Python exclusions from:
 ##   https://github.com/github/gitignore/blob/576334520435382d6522f349b9d270eda1e79a25/Python.gitignore

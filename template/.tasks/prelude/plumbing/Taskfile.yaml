@@ -7,13 +7,13 @@ version: "3.50"
 
 set: [pipefail]
 
-tasks:
-  default:
-    cmds:
-      - task: "register:includes"
+vars:
+  TASK_INCLUSIONS_INDEX_DIR: "./tasks/.plumbing/managed"
+  TASK_INCLUSIONS_ROOT_DIR: "./tasks/managed"
 
+tasks:
   register:includes:
-    desc: "Register tasks"
+    desc: "Register managed tasks"
     summary: |
       Generates the Taskfile TASK_INCLUSIONS_INDEX_FILE.
 

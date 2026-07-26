@@ -4,19 +4,34 @@
 # - https://taskfile.dev/
 # - https://copier.readthedocs.io/en/stable/
 #
+# Copier requires Git to function.
+#
 # Set these variables to override the defaults:
 #   - COPIER_CMD
+#   - COPIER_GIT_COMMIT_SCOPE
+#   - COPIER_GIT_COMMIT_TYPE
 #   - COPIER_VERSION_ID
 
 version: "3.50"
 
 set: [pipefail]
 
+env:
+  GIT_TERMINAL_PROMPT: 0
+
 vars:
-  COPIER_VERSION_ID: "9.15.1"
+  COPIER_VERSION_ID: "9.17.0"
   DEFAULT_COPIER_CMD: "pipx run copier=={{.COPIER_VERSION_ID}}"
+  DEFAULT_COPIER_GIT_COMMIT_SCOPE: "copier"
+  DEFAULT_COPIER_GIT_COMMIT_TYPE: "feat"
   CURRENT_COPIER_CMD:
     ref: "default .DEFAULT_COPIER_CMD .COPIER_CMD"
+  CURRENT_COPIER_GIT_COMMIT_SCOPE:
+    ref: "default .DEFAULT_COPIER_GIT_COMMIT_SCOPE .COPIER_GIT_COMMIT_SCOPE"
+  CURRENT_COPIER_GIT_COMMIT_TYPE:
+    ref: "default .DEFAULT_COPIER_GIT_COMMIT_TYPE .COPIER_GIT_COMMIT_TYPE"
+  COPIER_GIT_COMMIT_SCOPE: "copier"
+  COPIER_GIT_MESSAGE_PREFIX: "{{.CURRENT_COPIER_GIT_COMMIT_TYPE}}({{.CURRENT_COPIER_GIT_COMMIT_SCOPE}})"
   COPIER_PRELUDE_ANSWERS_FILE: ".copier-answers-sve-prelude.yaml"
   COPIER_PROJECT_ANSWER_FILES:
     sh: "ls .copier-answers-*.*"
@@ -35,11 +50,20 @@ tasks:
 
       This uses Task argument forwarding, so that you can set Copier arguments as needed.
 
-      To avoid issues, use the Git SSH URL:
+      To avoid issues, use the Git SSH URL, rather than the HTTPS address.
       For example:
         task copier:add -- git@gitlab.com:group/my-copier-template.git
     cmds:
       - "{{.CURRENT_COPIER_CMD}} copy {{.CLI_ARGS}}"
+
+  clean:
+    desc: "Clean the current project"
+    summary: |
+      Clean the current project.
+      This prepares it for updates.
+    cmds:
+      - "git clean -fdx"
+      - "git reset --hard HEAD"
 
   list:
     desc: "Lists the Copier answers files in the current project"
@@ -78,6 +102,7 @@ tasks:
 
       Uses the answers file for the templates, rather than prompting the user.
     cmds:
+      - task: "clean"
       - task: "update:prelude"
       - task: "update:children"
 
@@ -91,7 +116,10 @@ tasks:
       This excludes the prelude Copier template.
     cmds:
       - for: { var: COPIER_PROJECT_ANSWER_FILES }
-        cmd: "{{.CURRENT_COPIER_CMD}} update -A -a {{.ITEM}}"
+        cmd: |
+          {{.CURRENT_COPIER_CMD}} update -A -a {{.ITEM}}
+          git add .
+          git commit -m "{{.COPIER_GIT_MESSAGE_PREFIX}}: Update from template {{.ITEM}}"
         if: '[ "{{.ITEM}}" != {{.COPIER_PRELUDE_ANSWERS_FILE}} ]'
 
   update:prelude:
@@ -102,6 +130,8 @@ tasks:
       Use the answers file for the template, rather than prompt the user.
     cmds:
       - "{{.CURRENT_COPIER_CMD}} update -A -a {{.COPIER_PRELUDE_ANSWERS_FILE}}"
+      - "git add ."
+      - 'git commit -m "{{.COPIER_GIT_MESSAGE_PREFIX}}: Update from template {{.COPIER_PRELUDE_ANSWERS_FILE}}"'
 
   update:single:
     desc: "Update a specific Copier template from an answers file"
@@ -111,7 +141,7 @@ tasks:
       To specify the Copier template, set the variable COPIER_ANSWERS_FILE.
       The URL of each template is stored by the relevant answers file in the current project.
       For example:
-        COPIER_ANSWERS_FILE=copier-answers-my-template.yaml task copier:update
+        COPIER_ANSWERS_FILE=copier-answers-my-template.yaml task copier:update:single
     requires:
       vars:
         - name: COPIER_ANSWERS_FILE
