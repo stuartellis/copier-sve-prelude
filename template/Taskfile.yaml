@@ -9,12 +9,12 @@ set: [pipefail]
 
 includes:
   copier:
-    taskfile: tasks/prelude/copier
+    taskfile: .tasks/prelude/copier
   plumbing:
-    taskfile: tasks/prelude/plumbing
+    taskfile: .tasks/prelude/plumbing
     flatten: true
   managed:
-    taskfile: tasks/.plumbing/managed
+    taskfile: .tasks/.plumbing/managed
     flatten: true
     optional: true
 
