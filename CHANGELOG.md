@@ -2,6 +2,17 @@
 
 <!-- version list -->
 
+## v0.8.0 (2026-07-28)
+
+### Features
+
+- **template**: Move answers files for template
+  ([`9e86718`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/9e86718f8920a9bda3c8fe1940d921f13c7f96ce))
+
+- **tooling**: Upgrade Copier to 9.17.0
+  ([`dce8a95`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/dce8a9533c54c6d1b4a2d8ebaae755a910e60ae1))
+
+
 ## v0.7.0 (2026-07-26)
 
 ### Bug Fixes
