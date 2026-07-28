@@ -32,9 +32,9 @@ vars:
     ref: "default .DEFAULT_COPIER_GIT_COMMIT_TYPE .COPIER_GIT_COMMIT_TYPE"
   COPIER_GIT_COMMIT_SCOPE: "copier"
   COPIER_GIT_MESSAGE_PREFIX: "{{.CURRENT_COPIER_GIT_COMMIT_TYPE}}({{.CURRENT_COPIER_GIT_COMMIT_SCOPE}})"
-  COPIER_PRELUDE_ANSWERS_FILE: ".copier-answers-sve-prelude.yaml"
+  COPIER_PRELUDE_ANSWERS_FILE: ".copier/.copier-answers-sve-prelude.yaml"
   COPIER_PROJECT_ANSWER_FILES:
-    sh: "ls .copier-answers-*.*"
+    sh: "ls .copier/.copier-answers-*.*"
 
 tasks:
   default:

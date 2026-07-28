@@ -13,7 +13,7 @@ _subdirectory: template
 
 # Name of the answers file.
 # This must be unique to avoid conflicts with other Copier templates.
-_answers_file: .copier-answers-sve-prelude.yaml
+_answers_file: .copier/.copier-answers-sve-prelude.yaml
 
 # Use alternate template delimiters
 # This avoids conflicts with templating that is defined in the managed files
@@ -29,8 +29,8 @@ _envops:
 _skip_if_exists:
   - .gitignore
   - .gitlab-ci.yml
-  - Taskfile.yaml
   - README.md
+  - Taskfile.yaml
 
 # Prompts
 
