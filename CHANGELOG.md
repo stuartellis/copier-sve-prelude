@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.9.1 (2026-07-28)
+
+### Bug Fixes
+
+- **template**: Amend paths for tasks
+  ([`db20533`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/db20533cc7d591daefe4532fd870eb4c62f2679d))
+
+
 ## v0.9.0 (2026-07-28)
 
 ### Features
