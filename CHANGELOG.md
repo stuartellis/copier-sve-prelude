@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.9.0 (2026-07-28)
+
+### Features
+
+- **tooling**: Remove prelude template
+  ([`bef680c`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/bef680cd247aedf5f22dbdfb8b45813fc7a18efc))
+
+
 ## v0.8.0 (2026-07-28)
 
 ### Features
