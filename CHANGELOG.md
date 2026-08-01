@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v0.10.0 (2026-08-01)
+
+### Features
+
+- **template**: Simplify use of Copier
+  ([`f87dce2`](https://gitlab.com/stuartellis-org/templates/copier-sve-prelude/-/commit/f87dce28d4943df9b239a37e2811e729490ea148))
+
+
 ## v0.9.1 (2026-07-28)
 
 ### Bug Fixes
