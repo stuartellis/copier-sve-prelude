@@ -1,5 +1,5 @@
 ---
-# Tasks for managing Task configurations
+# Tasks for
 #
 # - https://taskfile.dev/
 
@@ -8,11 +8,12 @@ version: "3.50"
 set: [pipefail]
 
 vars:
-  TASK_INCLUSIONS_INDEX_DIR: "./tasks/.plumbing/managed"
+  PRELUDE_COPIER_ANSWERS_FILE: ".copier/.copier-answers-sve-prelude.yaml"
+  TASK_INCLUSIONS_INDEX_DIR: "./tasks/plumbing/managed"
   TASK_INCLUSIONS_ROOT_DIR: "./tasks/managed"
 
 tasks:
-  register:includes:
+  register:tasks:
     desc: "Register managed tasks"
     summary: |
       Generates the Taskfile TASK_INCLUSIONS_INDEX_FILE.
@@ -38,3 +39,23 @@ tasks:
       TASK_INCLUSIONS_DIRS:
         sh: "ls {{.TASK_INCLUSIONS_ROOT_DIR}}"
       TASK_INCLUSIONS_INDEX_FILE: "{{.TASK_INCLUSIONS_INDEX_DIR}}/Taskfile.yaml"
+
+  reset:
+    desc: "Reset the current project"
+    summary: |
+      Reset the current project to the most recent Git commit.
+      This prepares it for updates.
+    cmds:
+      - "git clean -fdx"
+      - "git reset --hard HEAD"
+
+  update:prelude:
+    desc: "Update the prelude Copier template"
+    summary: |
+      Update the current project with the prelude Copier template.
+
+      Use the answers file for the template, rather than prompt the user.
+    cmds:
+      - task: "copier:update:auto"
+    vars:
+      COPIER_ANSWERS_FILE: "{{.PRELUDE_COPIER_ANSWERS_FILE}}"

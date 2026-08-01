@@ -14,7 +14,7 @@ includes:
     taskfile: .tasks/prelude/plumbing
     flatten: true
   managed:
-    taskfile: .tasks/.plumbing/managed
+    taskfile: .tasks/plumbing/managed
     flatten: true
     optional: true
 
